@@ -81,7 +81,8 @@ def findFiles(fileListList, searchLocation):
                 if (eachFileToFind == filename) and (fileFound == False):
                     print("Found")
                     fileFound = True
-                    filesFoundLoc.append(os.path.abspath(eachFileToFind))
+                    #filesFoundLoc.append(os.path.abspath(eachFileToFind)) Original
+                    filesFoundLoc.append(os.path.abspath(os.path.join(folderName, eachFileToFind)))
                     filesFound.append(eachFileToFind)
                     break
         if (fileFound == False):
