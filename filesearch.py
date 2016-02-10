@@ -57,7 +57,7 @@ def setSearchLocation():
     useDefaultLocation = input("\nIs filesearch.py located in directory to search through? y/n:\n")
     rootFolder = ""
     if useDefaultLocation == "y":
-        rootFolder = "..\\"
+        rootFolder = ".\\"
     elif useDefaultLocation =="n":
         while (os.path.isabs(rootFolder) != True):
             rootFolder = input("\nEnter absolute path of root folder to search through:\n")
