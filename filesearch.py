@@ -1,6 +1,7 @@
 import os #Used for handling file names and paths.
 import re #Used for verifying file names
 import datetime #Used for creating unique file names when saving results.
+
 def setFileListLocation():
     #Get location of document containing list of files to search through.
     fileList = ""
@@ -80,6 +81,7 @@ def findFiles(fileListList, searchLocation):
     return [filesFound,filesNotFound]
 
 def printResults(results):
+    #Print results in readble form
     print("\nFiles Found:")
     for found in results[0]:
         print("    " + found)
@@ -88,8 +90,9 @@ def printResults(results):
         print("    " + notFound)
 
 def saveResults(foundNotFoundFiles):
+    #Save results to txt file.
     timeNow = datetime.datetime.now()
-    timeNow = timeNow.strftime('%Y-%m-%d %H-%M-%S') + ".txt"
+    timeNow = "results " + timeNow.strftime('%Y-%m-%d %H-%M-%S') + ".txt"
     createFile = open(timeNow,'w')
     createFile.write('Files Found:\n')
     for found in foundNotFoundFiles[0]:
