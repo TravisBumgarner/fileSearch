@@ -105,7 +105,7 @@ def saveResults(foundNotFoundFiles):
     createFile = open(timeNow,'w')
     createFile.write('Files Found:\n')
     for found in range(len(foundNotFoundFiles[0])):
-        createFile.write("    " + foundNotFoundFiles[0][found] + ": " + foundNotFoundFiles[1][found])
+        createFile.write("    " + foundNotFoundFiles[0][found] + ": " + foundNotFoundFiles[1][found] + "\n")
     createFile.write('\n\nFiles Not Found:\n') 
     for notFound in foundNotFoundFiles[2]:
         createFile.write("    " + notFound + '\n')
