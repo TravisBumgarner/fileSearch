@@ -60,8 +60,9 @@ def setSearchLocation():
 
 def findFiles(fileListList, searchLocation):
     #Search through for each file
-    print("Searching directory...")
+    print("\nSearching directory...")
     filesFound = []
+    filesFoundLoc = []
     filesNotFound = []
     for eachFileToFind in fileListList:
         print("    " + "Searching for " + eachFileToFind + "...", end="")
@@ -73,20 +74,21 @@ def findFiles(fileListList, searchLocation):
                 if (eachFileToFind == filename) and (fileFound == False):
                     print("Found")
                     fileFound = True
+                    filesFoundLoc.append(os.path.abspath(eachFileToFind))
                     filesFound.append(eachFileToFind)
                     break
         if (fileFound == False):
             print("Not found")
             filesNotFound.append(eachFileToFind)
-    return [filesFound,filesNotFound]
+    return [filesFound,filesFoundLoc,filesNotFound]
 
 def printResults(results):
     #Print results in readble form
     print("\nFiles Found:")
-    for found in results[0]:
-        print("    " + found)
+    for found in range(len(results[0])):
+        print("    " + results[0][found] + ": " + results[1][found])
     print("\nFiles Not Found:")
-    for notFound in results[1]:
+    for notFound in results[2]:
         print("    " + notFound)
 
 def saveResults(foundNotFoundFiles):
@@ -95,11 +97,11 @@ def saveResults(foundNotFoundFiles):
     timeNow = "results " + timeNow.strftime('%Y-%m-%d %H-%M-%S') + ".txt"
     createFile = open(timeNow,'w')
     createFile.write('Files Found:\n')
-    for found in foundNotFoundFiles[0]:
-        createFile.write(found + '\n')
-    createFile.write('\nFiles Not Found:\n') 
-    for notFound in foundNotFoundFiles[1]:
-        createFile.write(notFound + '\n')
+    for found in range(len(foundNotFoundFiles[0])):
+        createFile.write("    " + foundNotFoundFiles[0][found] + ": " + foundNotFoundFiles[1][found])
+    createFile.write('\n\nFiles Not Found:\n') 
+    for notFound in foundNotFoundFiles[2]:
+        createFile.write("    " + notFound + '\n')
     createFile.close()
     print('\nFile ' + timeNow + ' was successfully saved with results of search.')
    
