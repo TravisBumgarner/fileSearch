@@ -98,16 +98,19 @@ def printResults(results):
     for notFound in results[2]:
         print("    " + notFound)
 
-def saveResults(foundNotFoundFiles):
+def saveResults(results):
     #Save results to txt file.
     timeNow = datetime.datetime.now()
     timeNow = "results " + timeNow.strftime('%Y-%m-%d %H-%M-%S') + ".txt"
     createFile = open(timeNow,'w')
     createFile.write('Files Found:\n')
-    for found in range(len(foundNotFoundFiles[0])):
-        createFile.write("    " + foundNotFoundFiles[0][found] + ": " + foundNotFoundFiles[1][found] + "\n")
+    #Printing Formatting
+    if  len(results[0]) != 0:
+        padding = len(max(results[0], key=len))
+    for found in range(len(results[0])):       
+        createFile.write("    " + results[0][found].ljust(padding) + ": " + results[1][found] + "\n")
     createFile.write('\n\nFiles Not Found:\n') 
-    for notFound in foundNotFoundFiles[2]:
+    for notFound in results[2]:
         createFile.write("    " + notFound + '\n')
     createFile.close()
     print('\nFile ' + timeNow + ' was successfully saved with results of search.')
