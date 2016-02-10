@@ -28,22 +28,29 @@ def importFileList(fileList):
     fileListList = fileListString.split("\n")
     fileNameRegEx = re.compile('^[\w,\s-]+\.[A-Za-z0-9]+$')
     invalidFileCounter = 0
+    cleanFileListList = []
     for eachFile in fileListList:
         eachFile = eachFile.strip()
         if eachFile == "":
-            print("Check that txt document containing files is not empty.")
-            invalidFileCounter += 1
+            #ignores any whitespace lines
+            continue
         elif fileNameRegEx.search(eachFile) == None:
             print("    " + eachFile + ", located at line " + str(fileListList.index(eachFile)+1) + " is not a valid file name.")
             invalidFileCounter += 1
+        else:
+            cleanFileListList.append(eachFile)
     if invalidFileCounter >0:
         print("Fix file name issues and try again.")
         return "invalidFileNames"
+    elif len(cleanFileListList) == 0:
+        print("Check that txt document containing files is not empty.")
+        invalidFileCounter += 1
+        return "invalidFileNames"   
     else:
         print("Searching for the following files...")
-        for each in fileListList:
+        for each in cleanFileListList:
             print("    " + each)
-        return fileListList
+        return cleanFileListList
 
 def setSearchLocation():
     #Specify directory through which the program will search.
